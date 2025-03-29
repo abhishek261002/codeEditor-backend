@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../src/db/index.js"; // Use the existing sequelize instance
+import { sequelize } from "../db/index.js"; // Use the existing sequelize instance
 
 const User = sequelize.define(
   "User",
@@ -17,6 +17,9 @@ const User = sequelize.define(
       allowNull: false,
       unique: true,
       lowercase: true,
+      set(value){
+        this.setDataValue("username", value.toLowerCase());
+      }
     },
     email: {
       type: DataTypes.STRING,
